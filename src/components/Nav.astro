@@ -1,0 +1,182 @@
+---
+import type { Lang, Translations } from "../i18n/translations";
+
+interface Props {
+    lang: Lang;
+    tr: Translations;
+    base: string;
+}
+
+const { lang, tr, base } = Astro.props;
+const prefix = lang === "en" ? `${base}en/` : base;
+const currentPath = Astro.url.pathname;
+
+const links = [
+    { key: "musik", href: lang === "en" ? `${base}en/music` : `${base}music` },
+    { key: "live", href: lang === "en" ? `${base}en/live` : `${base}live` },
+    {
+        key: "videos",
+        href: lang === "en" ? `${base}en/videos` : `${base}videos`,
+    },
+    {
+        key: "galerie",
+        href: lang === "en" ? `${base}en/gallery` : `${base}gallery`,
+    },
+    {
+        key: "kontakt",
+        href: lang === "en" ? `${base}en/contact` : `${base}contact`,
+    },
+] as const;
+
+const homeHref = lang === "en" ? `${base}en` : base;
+
+// Smart language switch: stay on the equivalent page in the other language
+const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
+const pathAfterBase = currentPath.startsWith(baseNoSlash)
+    ? currentPath.slice(baseNoSlash.length)
+    : currentPath;
+
+const deToEn: Record<string, string> = {
+    impressum: "imprint",
+    datenschutz: "privacy",
+};
+const enToDe: Record<string, string> = {
+    imprint: "impressum",
+    privacy: "datenschutz",
+};
+
+let langToggleHref: string;
+if (lang === "de") {
+    const slug = pathAfterBase.replace(/^\//, "").replace(/\/$/, "");
+    const enSlug = deToEn[slug] ?? slug;
+    langToggleHref = enSlug ? `${base}en/${enSlug}` : `${base}en`;
+} else {
+    const slug = pathAfterBase.replace(/^\/en\/?/, "").replace(/\/$/, "");
+    const deSlug = enToDe[slug] ?? slug;
+    langToggleHref = deSlug ? `${base}${deSlug}` : base;
+}
+---
+
+<header
+    id="site-nav"
+    class="nav-blur fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+    <nav
+        class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16"
+        aria-label="Hauptnavigation"
+    >
+        <!-- Logo -->
+        <a
+            href={homeHref}
+            class="font-display text-2xl font-bold tracking-tight text-[var(--text)] hover:text-[var(--accent)] transition-colors duration-200"
+            aria-label="JÆCK – Startseite"
+        >
+            JÆCK
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0">
+            {
+                links.map(({ key, href }) => (
+                    <li>
+                        <a
+                            href={href}
+                            class={`text-sm tracking-widest uppercase font-light transition-colors duration-200 link-line ${
+                                currentPath.startsWith(href) && href !== base
+                                    ? "text-[var(--accent)]"
+                                    : "text-[var(--muted)] hover:text-[var(--text)]"
+                            }`}
+                        >
+                            {tr.nav[key]}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <!-- Right: lang toggle + hamburger -->
+        <div class="flex items-center gap-4">
+            <a
+                href={langToggleHref}
+                class="text-xs tracking-widest uppercase text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200"
+                aria-label="Sprache wechseln"
+            >
+                {tr.langSwitch}
+            </a>
+
+            <!-- Mobile hamburger -->
+            <button
+                id="nav-toggle"
+                class="md:hidden flex flex-col gap-1.5 p-1"
+                aria-label="Menü öffnen"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+            >
+                <span
+                    class="nav-bar block w-6 h-px bg-[var(--text)] transition-all duration-300"
+                ></span>
+                <span
+                    class="nav-bar block w-6 h-px bg-[var(--text)] transition-all duration-300"
+                ></span>
+                <span
+                    class="nav-bar block w-4 h-px bg-[var(--text)] transition-all duration-300"
+                ></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div
+        id="mobile-menu"
+        class="md:hidden overflow-hidden max-h-0 transition-all duration-300 ease-in-out"
+        aria-hidden="true"
+    >
+        <ul class="flex flex-col px-6 pb-6 gap-5 list-none m-0 p-0 pt-2">
+            {
+                links.map(({ key, href }) => (
+                    <li>
+                        <a
+                            href={href}
+                            class={`text-base tracking-widest uppercase font-light transition-colors duration-200 ${
+                                currentPath.startsWith(href) && href !== base
+                                    ? "text-[var(--accent)]"
+                                    : "text-[var(--muted)] hover:text-[var(--text)]"
+                            }`}
+                        >
+                            {tr.nav[key]}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</header>
+
+<script>
+    const toggle = document.getElementById("nav-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const bars = document.querySelectorAll(".nav-bar");
+
+    toggle?.addEventListener("click", () => {
+        const open = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!open));
+        if (menu) {
+            menu.setAttribute("aria-hidden", String(open));
+            menu.style.maxHeight = open ? "0" : menu.scrollHeight + "px";
+        }
+        // Animate bars
+        if (!open) {
+            bars[0]?.classList.add("translate-y-[8px]", "rotate-45");
+            bars[1]?.classList.add("opacity-0");
+            bars[2]?.classList.add("-translate-y-[6px]", "-rotate-45", "!w-6");
+        } else {
+            bars[0]?.classList.remove("translate-y-[8px]", "rotate-45");
+            bars[1]?.classList.remove("opacity-0");
+            bars[2]?.classList.remove(
+                "-translate-y-[6px]",
+                "-rotate-45",
+                "!w-6",
+            );
+        }
+    });
+</script>

@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { t } from "../i18n/translations";
+import { base } from "../utils/url";
+const tr = t("de");
+
+const images = [
+    {
+        src: "https://jaeckmusic.com/_assets/media/5017f922d0baebd189b4cb94f58cc9e6.jpg",
+        alt: "JÆCK Foto 1",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/741a1105406217c3778a3fc0667d069e.jpg",
+        alt: "JÆCK Foto 2",
+        wide: true,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/d38a4328c41fca6800afc3664269cd42.jpg",
+        alt: "JÆCK Foto 3",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/40d4279802b1c6b223d1bf424a76cb39.jpg",
+        alt: "JÆCK Foto 4",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/cf4d43ae80d357f563b0f60540cf5220.jpg",
+        alt: "JÆCK Foto 5",
+        wide: true,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/8e7df650ad99b989e0d7944d7ff8b130.jpg",
+        alt: "JÆCK Foto 6",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/e83ba60dca0e349db8d51579f74c492d.jpg",
+        alt: "JÆCK Foto 7",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/2ad8e33235d66c48fcadb29df4750519.jpg",
+        alt: "JÆCK Foto 8",
+        wide: true,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/9dbf8176b1790f849ce0ddcba53b84b2.jpg",
+        alt: "JÆCK Foto 9",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/9cbd50704f4b562881c18442e222923b.jpg",
+        alt: "JÆCK Foto 10",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/e2dc8c91dbc7bbed76cbe9ab7a819fec.jpg",
+        alt: "JÆCK Foto 11",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/370dd215a7c5a46ccd1413b0ad737bfd.jpg",
+        alt: "JÆCK Foto 12",
+        wide: false,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/a4a6a3c2cedf1204e7ca0f54dccc9f76.jpg",
+        alt: "JÆCK Foto 13",
+        wide: true,
+    },
+    {
+        src: "https://jaeckmusic.com/_assets/media/da9f5b16dae7932115b048e06d8fc25e.jpg",
+        alt: "JÆCK Foto 14",
+        wide: false,
+    },
+];
+---
+
+<Layout
+    title={tr.galeriePage.title}
+    description={tr.galeriePage.description}
+    lang="de"
+>
+    <div class="pt-32 pb-20 max-w-7xl mx-auto px-6">
+        <!-- Header -->
+        <div class="mb-16">
+            <p
+                class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-4"
+            >
+                <span class="accent-line"></span>{tr.galeriePage.sectionLabel}
+            </p>
+            <h1 class="font-display text-6xl md:text-8xl font-light">
+                {tr.galeriePage.heading}
+            </h1>
+        </div>
+
+        <!-- Masonry-style grid -->
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+            {
+                images.map(({ src, alt }) => (
+                    <div class="img-reveal break-inside-avoid">
+                        <img
+                            src={src}
+                            alt={alt}
+                            class="w-full h-auto object-cover"
+                            loading="lazy"
+                            width="600"
+                            height="800"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</Layout>

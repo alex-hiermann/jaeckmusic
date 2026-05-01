@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+/* ── Design tokens ────────────────────────────────── */
+:root {
+    --bg: #080808;
+    --surface: #111111;
+    --surface-2: #161616;
+    --border: #222222;
+    --text: #f0ece4;
+    --muted: #888880;
+    --accent: #c9a96e;
+    --accent-dim: #8b6f3a;
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Base ─────────────────────────────────────────── */
+html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+    color: var(--text);
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    min-height: 100dvh;
+    overflow-x: hidden;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* ── Film grain ───────────────────────────────────── */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    background-repeat: repeat;
+}
+
+/* ── Skip link ────────────────────────────────────── */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 10000;
+    padding: 0.5rem 1rem;
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+    border-radius: 0 0 0.5rem 0.5rem;
+    text-decoration: none;
+    transition: top 0.1s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ── Typography helpers ───────────────────────────── */
+.font-display {
+    font-family: var(--font-display);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.1;
+}
+
+/* ── Accent color utility ─────────────────────────── */
+.text-accent {
+    color: var(--accent);
+}
+
+.bg-surface {
+    background: var(--surface);
+}
+
+.bg-surface-2 {
+    background: var(--surface-2);
+}
+
+.border-subtle {
+    border-color: var(--border);
+}
+
+/* ── Horizontal scroll gallery ───────────────────── */
+.scroll-gallery {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-dim) transparent;
+}
+
+.scroll-gallery>* {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+}
+
+.scroll-gallery::-webkit-scrollbar {
+    height: 3px;
+}
+
+.scroll-gallery::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scroll-gallery::-webkit-scrollbar-thumb {
+    background: var(--accent-dim);
+    border-radius: 9999px;
+}
+
+/* ── Image hover reveal ───────────────────────────── */
+.img-reveal {
+    overflow: hidden;
+}
+
+.img-reveal img {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.5s ease;
+    filter: grayscale(20%);
+}
+
+.img-reveal:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0%);
+}
+
+/* ── Animated underline link ──────────────────────── */
+.link-line {
+    position: relative;
+    text-decoration: none;
+}
+
+.link-line::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.link-line:hover::after {
+    width: 100%;
+}
+
+/* ── Nav blur backdrop ────────────────────────────── */
+.nav-blur {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(8, 8, 8, 0.85);
+    border-bottom: 1px solid var(--border);
+}
+
+/* ── Section divider ──────────────────────────────── */
+.divider {
+    width: 3rem;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto;
+}
+
+.divider-left {
+    margin: 0;
+}
+
+/* ── Glowing accent line ──────────────────────────── */
+.accent-line {
+    display: inline-block;
+    width: 3rem;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+
+/* ── Hero large text ──────────────────────────────── */
+.hero-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(5rem, 18vw, 18rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+
+/* ── Tag pill ─────────────────────────────────────── */
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--font-body);
+}
+
+/* ── Button styles ────────────────────────────────── */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: var(--accent);
+    color: #000;
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background: var(--accent-dim);
+    transform: translateY(-1px);
+}
+
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: transparent;
+    color: var(--text);
+    font-weight: 400;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ── Scrollbar global ─────────────────────────────── */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-dim);
+}
+
+/* ── Focus ring ───────────────────────────────────── */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* ── Form inputs ──────────────────────────────────── */
+.form-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.875rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: border-color 0.2s ease;
+    outline: none;
+    resize: none;
+}
+
+.form-input::placeholder {
+    color: var(--muted);
+}
+
+.form-input:focus {
+    border-color: var(--accent);
+}
+
+/* ── Video embed ──────────────────────────────────── */
+.video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ── Vertical text ────────────────────────────────── */
+.text-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+/* ── Fade in animation ────────────────────────────── */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-up-delay-1 {
+    animation-delay: 0.15s;
+    opacity: 0;
+}
+
+.animate-fade-up-delay-2 {
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+.animate-fade-up-delay-3 {
+    animation-delay: 0.45s;
+    opacity: 0;
+}
+
+.animate-fade-up-delay-4 {
+    animation-delay: 0.6s;
+    opacity: 0;
+}

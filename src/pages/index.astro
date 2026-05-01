@@ -1,0 +1,330 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { t } from "../i18n/translations";
+import { base } from "../utils/url";
+const tr = t("de");
+
+const galleryImages = [
+  "https://jaeckmusic.com/_assets/media/5017f922d0baebd189b4cb94f58cc9e6.jpg",
+  "https://jaeckmusic.com/_assets/media/741a1105406217c3778a3fc0667d069e.jpg",
+  "https://jaeckmusic.com/_assets/media/d38a4328c41fca6800afc3664269cd42.jpg",
+  "https://jaeckmusic.com/_assets/media/40d4279802b1c6b223d1bf424a76cb39.jpg",
+  "https://jaeckmusic.com/_assets/media/cf4d43ae80d357f563b0f60540cf5220.jpg",
+  "https://jaeckmusic.com/_assets/media/8e7df650ad99b989e0d7944d7ff8b130.jpg",
+];
+---
+
+<Layout
+  title="JÆCK – Singer, Songwriter"
+  description="JÆCK – Österreichischer Singer-Songwriter. Musik auf Englisch & Deutsch, Event Music, Gitarre & Stimme."
+  lang="de"
+>
+  <!-- HERO -->
+  <section class="relative min-h-dvh flex flex-col justify-end overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://jaeckmusic.com/_assets/media/2e4995f9a7a6ed6f337f4d3979140bd0.png"
+        alt=""
+        aria-hidden="true"
+        class="w-full h-full object-cover object-top"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/60 to-[#080808]/20"
+      >
+      </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#080808]/80 via-transparent to-transparent"
+      >
+      </div>
+    </div>
+    <p
+      class="text-vertical absolute right-8 top-1/2 -translate-y-1/2 text-xs tracking-[0.3em] uppercase text-[var(--muted)] z-10 hidden lg:block"
+    >
+      Singer · Songwriter
+    </p>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 pb-24 pt-32 w-full">
+      <p
+        class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-6 animate-fade-up animate-fade-up-delay-1"
+      >
+        <span class="accent-line"></span>{tr.hero.tagline}
+      </p>
+      <h1 class="hero-name mb-8 animate-fade-up animate-fade-up-delay-2">
+        JÆCK
+      </h1>
+      <p
+        class="text-lg md:text-xl text-[var(--muted)] mb-10 max-w-md font-light tracking-wide animate-fade-up animate-fade-up-delay-3"
+      >
+        {tr.hero.subtitle}
+      </p>
+      <div class="flex flex-wrap gap-4 animate-fade-up animate-fade-up-delay-4">
+        <a href={`${base}contact`} class="btn-primary">
+          {tr.hero.ctaBooking}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+          >
+        </a>
+        <a href={`${base}music`} class="btn-ghost">{tr.hero.ctaMusic}</a>
+      </div>
+    </div>
+    <div
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+    >
+      <span class="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)]"
+        >Scroll</span
+      >
+      <div
+        class="w-px h-12 bg-gradient-to-b from-[var(--muted)] to-transparent"
+      >
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="max-w-7xl mx-auto px-6 py-32">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div class="relative img-reveal order-2 lg:order-1">
+        <img
+          src="https://jaeckmusic.com/_assets/media/e83ba60dca0e349db8d51579f74c492d.jpg"
+          alt="JÆCK"
+          class="w-full aspect-[3/4] object-cover"
+          width="800"
+          height="1067"
+          loading="lazy"
+        />
+        <div
+          class="absolute -bottom-4 -right-4 w-24 h-24 border-r border-b border-[var(--accent)] opacity-40 pointer-events-none"
+        >
+        </div>
+        <div
+          class="absolute -top-4 -left-4 w-24 h-24 border-l border-t border-[var(--accent)] opacity-40 pointer-events-none"
+        >
+        </div>
+      </div>
+      <div class="order-1 lg:order-2">
+        <p class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-6">
+          <span class="accent-line"></span>{tr.about.sectionLabel}
+        </p>
+        <h2
+          class="font-display text-5xl md:text-6xl font-light italic mb-8 leading-tight"
+        >
+          {tr.about.heading}
+        </h2>
+        <p class="text-[var(--muted)] leading-relaxed mb-5 font-light">
+          {tr.about.p1}
+        </p>
+        <p class="text-[var(--muted)] leading-relaxed mb-10 font-light">
+          {tr.about.p2}
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag">{tr.about.tag1}</span>
+          <span class="tag">{tr.about.tag2}</span>
+          <span class="tag">{tr.about.tag3}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS BAR -->
+  <section class="border-y border-[var(--border)] py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div
+        class="flex flex-wrap justify-center md:justify-between items-center gap-8"
+      >
+        {
+          [
+            { value: "Gasometer", label: "Wien" },
+            { value: "The Voice", label: "of Germany" },
+            { value: "DE & EN", label: "Sprachen" },
+            { value: "Live", label: "Events & Booking" },
+          ].map(({ value, label }) => (
+            <div class="text-center px-8 md:border-l first:border-l-0 border-[var(--border)]">
+              <p class="font-display text-3xl md:text-4xl font-semibold text-[var(--text)] mb-1">
+                {value}
+              </p>
+              <p class="text-xs tracking-widest uppercase text-[var(--muted)]">
+                {label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="max-w-7xl mx-auto px-6 py-28">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <p class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-3">
+          <span class="accent-line"></span>{tr.galeriePage.sectionLabel}
+        </p>
+        <h2 class="font-display text-4xl md:text-5xl font-light">
+          {tr.galeriePage.heading}
+        </h2>
+      </div>
+      <a href={`${base}gallery`} class="btn-ghost hidden sm:inline-flex">
+        Alle Fotos
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+        >
+      </a>
+    </div>
+    <div class="scroll-gallery">
+      {
+        galleryImages.map((src, i) => (
+          <div class="img-reveal flex-shrink-0">
+            <img
+              src={src}
+              alt={`JÆCK Foto ${i + 1}`}
+              class="w-64 md:w-80 h-80 md:h-96 object-cover"
+              loading="lazy"
+              width="320"
+              height="384"
+            />
+          </div>
+        ))
+      }
+    </div>
+    <a href={`${base}gallery`} class="btn-ghost sm:hidden mt-6 inline-flex">
+      Alle Fotos
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+      >
+    </a>
+  </section>
+
+  <!-- MUSIC TEASER -->
+  <section class="bg-[var(--surface)] border-y border-[var(--border)] py-28">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-2xl">
+        <p class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-6">
+          <span class="accent-line"></span>{tr.musikPage.sectionLabel}
+        </p>
+        <h2 class="font-display text-5xl md:text-6xl font-light italic mb-6">
+          {tr.musikPage.heading}
+        </h2>
+        <p class="text-[var(--muted)] mb-10 font-light leading-relaxed">
+          JÆCK schreibt Songs, die Momente festhalten. Zwischen Englisch und
+          Deutsch, zwischen Akustik und Produktion.
+        </p>
+        <a href={`${base}music`} class="btn-primary">
+          {tr.musikPage.spotifyNote}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+          >
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE TEASER -->
+  <section class="max-w-7xl mx-auto px-6 py-28">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-6">
+          <span class="accent-line"></span>{tr.livePage.sectionLabel}
+        </p>
+        <h2 class="font-display text-5xl md:text-6xl font-light mb-6">
+          {tr.livePage.heading}
+        </h2>
+        <p
+          class="text-[var(--muted)] mb-10 font-light leading-relaxed max-w-lg"
+        >
+          Von der intimen Akustik-Session bis zur großen Bühne — JÆCK bringt
+          jedes Publikum zum Schweigen und Mitsingen.
+        </p>
+        <a href={`${base}live`} class="btn-ghost">{tr.livePage.bookingCta}</a>
+      </div>
+      <div class="relative img-reveal">
+        <img
+          src="https://jaeckmusic.com/_assets/media/2ad8e33235d66c48fcadb29df4750519.jpg"
+          alt="JÆCK Live"
+          class="w-full aspect-video object-cover"
+          loading="lazy"
+          width="800"
+          height="450"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="relative py-40 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://jaeckmusic.com/_assets/media/9dbf8176b1790f849ce0ddcba53b84b2.jpg"
+        alt=""
+        aria-hidden="true"
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-[#080808]/80"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+      <p class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-6">
+        Booking
+      </p>
+      <h2
+        class="font-display text-5xl md:text-7xl font-light italic mb-6 text-[var(--text)]"
+      >
+        Lass uns etwas schaffen.
+      </h2>
+      <p class="text-[var(--muted)] mb-10 text-lg font-light">
+        Für Events, Hochzeiten, Firmenfeiern & mehr.
+      </p>
+      <a href={`${base}contact`} class="btn-primary">
+        Booking anfragen
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+        >
+      </a>
+    </div>
+  </section>
+</Layout>

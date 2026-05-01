@@ -1,0 +1,166 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { t } from "../i18n/translations";
+import { base } from "../utils/url";
+const tr = t("de");
+---
+
+<Layout title={tr.datenschutz.title} noindex={true} lang="de">
+    <div class="pt-32 pb-20 max-w-3xl mx-auto px-6">
+        <h1 class="font-display text-5xl md:text-6xl font-light mb-12">
+            {tr.datenschutz.heading}
+        </h1>
+
+        <div
+            class="space-y-10 text-[var(--muted)] font-light leading-relaxed text-sm"
+        >
+            <section class="border-t border-[var(--border)] pt-8">
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-4"
+                >
+                    1. Verantwortlicher
+                </p>
+                <p>
+                    JÆCK · [Vollständiger Name] · <a
+                        href="mailto:contact@jaeckmusic.com"
+                        class="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+                        >contact@jaeckmusic.com</a
+                    >
+                </p>
+            </section>
+
+            <section class="border-t border-[var(--border)] pt-8">
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-4"
+                >
+                    2. Hosting – GitHub Pages
+                </p>
+                <p>
+                    Diese Website wird auf GitHub Pages (GitHub, Inc., 88 Colin
+                    P. Kelly Jr. St., San Francisco, CA 94107, USA) gehostet.
+                    Beim Aufruf der Website werden automatisch technische Daten
+                    (IP-Adresse, Datum/Uhrzeit, aufgerufene Seite) erhoben.
+                    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
+                    Interesse am sicheren Betrieb). Details: <a
+                        href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+                        >GitHub Datenschutzerklärung ↗</a
+                    >
+                </p>
+            </section>
+
+            <section class="border-t border-[var(--border)] pt-8">
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-4"
+                >
+                    3. Kontaktformular (Formspree)
+                </p>
+                <p>
+                    Das Kontaktformular nutzt den Dienst Formspree (Formspree
+                    Inc., Baltimore, MD, USA). Die übermittelten Daten (Name,
+                    E-Mail, Nachricht) werden ausschließlich zur Bearbeitung
+                    deiner Anfrage verwendet und nicht an Dritte weitergegeben.
+                    Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO
+                    (Vertragsanbahnung). Details: <a
+                        href="https://formspree.io/legal/privacy-policy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+                        >Formspree Datenschutz ↗</a
+                    >
+                </p>
+            </section>
+
+            <section class="border-t border-[var(--border)] pt-8">
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-4"
+                >
+                    4. Eingebettete Inhalte
+                </p>
+                <p class="mb-3">
+                    <strong class="text-[var(--text)] font-normal"
+                        >YouTube (Google LLC):</strong
+                    > Videos werden über youtube-nocookie.com eingebettet. Beim Abspielen
+                    überträgt YouTube Daten gemäß deren Datenschutzrichtlinie.
+                    <a
+                        href="https://policies.google.com/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+                        >Google Datenschutz ↗</a
+                    >
+                </p>
+                <p>
+                    <strong class="text-[var(--text)] font-normal"
+                        >Spotify (Spotify AB):</strong
+                    > Musik-Player werden über open.spotify.com eingebettet. Beim
+                    Abspielen können Daten an Spotify übertragen werden.
+                    <a
+                        href="https://www.spotify.com/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+                        >Spotify Datenschutz ↗</a
+                    >
+                </p>
+            </section>
+
+            <section class="border-t border-[var(--border)] pt-8">
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-4"
+                >
+                    5. Google Fonts
+                </p>
+                <p>
+                    Diese Website lädt Schriftarten von Google Fonts (Google
+                    LLC, Mountain View, CA, USA). Dabei wird deine IP-Adresse an
+                    Google übertragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f
+                    DSGVO.
+                    <a
+                        href="https://policies.google.com/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+                        >Google Datenschutz ↗</a
+                    >
+                </p>
+            </section>
+
+            <section class="border-t border-[var(--border)] pt-8">
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-4"
+                >
+                    6. Deine Rechte
+                </p>
+                <p>
+                    Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung
+                    (Art. 16), Löschung (Art. 17), Einschränkung der
+                    Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie
+                    Widerspruch (Art. 21 DSGVO). Beschwerden kannst du bei der
+                    österreichischen Datenschutzbehörde (<a
+                        href="https://www.dsb.gv.at"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+                        >dsb.gv.at ↗</a
+                    >) einreichen.
+                </p>
+            </section>
+
+            <section class="border-t border-[var(--border)] pt-8">
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-4"
+                >
+                    7. Cookies &amp; Tracking
+                </p>
+                <p>
+                    Diese Website verwendet keine eigenen Cookies und kein
+                    Tracking. Es werden keine Analyse- oder Werbe-Tools
+                    eingesetzt.
+                </p>
+            </section>
+        </div>
+    </div>
+</Layout>

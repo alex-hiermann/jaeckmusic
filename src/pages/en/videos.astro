@@ -1,0 +1,116 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { t } from "../../i18n/translations";
+import { base } from "../../utils/url";
+const tr = t("en");
+
+const videos = [
+    {
+        id: "wZBYF9QcndA",
+        title: "JÆCK – Official YouTube Channel",
+        subtitle: "Music Video",
+    },
+    { id: "wZBYF9QcndA", title: "JÆCK – Live Performance", subtitle: "Live" },
+    {
+        id: "wZBYF9QcndA",
+        title: "JÆCK – Acoustic Session",
+        subtitle: "Acoustic",
+    },
+];
+---
+
+<Layout
+    title={tr.videosPage.title}
+    description={tr.videosPage.description}
+    lang="en"
+>
+    <div class="pt-32 pb-20 max-w-7xl mx-auto px-6">
+        <div
+            class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16"
+        >
+            <div>
+                <p
+                    class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-4"
+                >
+                    <span class="accent-line"></span>{
+                        tr.videosPage.sectionLabel
+                    }
+                </p>
+                <h1 class="font-display text-6xl md:text-8xl font-light">
+                    {tr.videosPage.heading}
+                </h1>
+            </div>
+            <a
+                href="https://www.youtube.com/@j%C3%A6ckofficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-ghost self-start sm:self-auto"
+            >
+                {tr.videosPage.channelCta} ↗
+            </a>
+        </div>
+
+        <div class="mb-12">
+            <div class="video-embed border border-[var(--border)]">
+                <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${videos[0].id}`}
+                    title={videos[0].title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy"></iframe>
+            </div>
+            <div class="mt-4">
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-1"
+                >
+                    {videos[0].subtitle}
+                </p>
+                <p class="font-display text-2xl font-light text-[var(--text)]">
+                    {videos[0].title}
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {
+                videos.slice(1).map(({ id, title, subtitle }) => (
+                    <div>
+                        <div class="video-embed border border-[var(--border)]">
+                            <iframe
+                                src={`https://www.youtube-nocookie.com/embed/${id}`}
+                                title={title}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-xs tracking-widest uppercase text-[var(--accent)] mb-1">
+                                {subtitle}
+                            </p>
+                            <p class="font-display text-xl font-light text-[var(--text)]">
+                                {title}
+                            </p>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <div class="mt-16 text-center">
+            <p
+                class="font-display text-2xl font-light italic text-[var(--text)] mb-6"
+            >
+                More videos on YouTube.
+            </p>
+            <a
+                href="https://www.youtube.com/@j%C3%A6ckofficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary"
+            >
+                Visit YouTube Channel ↗
+            </a>
+        </div>
+    </div>
+</Layout>

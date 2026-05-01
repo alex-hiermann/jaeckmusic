@@ -1,0 +1,115 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { getLang, t } from "../i18n/translations";
+import { base } from "../utils/url";
+
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+    noindex?: boolean;
+    lang?: "de" | "en";
+}
+
+const url = Astro.url;
+const detectedLang = getLang(url, base);
+
+const {
+    title,
+    description = "JÆCK – Singer, Songwriter aus Österreich. Musik auf Englisch & Deutsch, Event Music, Gitarre.",
+    image = `${base}images/og.jpg`,
+    noindex = false,
+    lang = detectedLang,
+} = Astro.props;
+
+const tr = t(lang);
+const canonicalURL = new URL(
+    url.pathname,
+    Astro.site ?? "https://alex-hiermann.github.io",
+);
+const ogImage = image.startsWith("http")
+    ? image
+    : new URL(
+          image,
+          Astro.site ?? "https://alex-hiermann.github.io",
+      ).toString();
+
+// Build alternate URLs for hreflang
+const siteBase = (Astro.site ?? "https://alex-hiermann.github.io")
+    .toString()
+    .replace(/\/$/, "");
+const pathname = url.pathname.replace(/^\/jaeckmusic/, "") || "/";
+const deHref = `${siteBase}/jaeckmusic${pathname === "/" ? "" : pathname}`;
+const enHref = `${siteBase}/jaeckmusic/en${pathname === "/" ? "" : pathname}`;
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+        <meta name="description" content={description} />
+        {noindex && <meta name="robots" content="noindex, nofollow" />}
+        <meta name="author" content="JÆCK" />
+        <meta name="theme-color" content="#080808" />
+        <link rel="canonical" href={canonicalURL} />
+        <link rel="alternate" hreflang="de" href={deHref} />
+        <link rel="alternate" hreflang="en" href={enHref} />
+        <link rel="alternate" hreflang="x-default" href={deHref} />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:site_name" content="JÆCK" />
+        <meta
+            property="og:locale"
+            content={lang === "de" ? "de_AT" : "en_US"}
+        />
+        <meta
+            property="og:locale:alternate"
+            content={lang === "de" ? "en_US" : "de_AT"}
+        />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+
+        <title>{title}</title>
+
+        <!-- JSON-LD Person -->
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "MusicGroup",
+                name: "JÆCK",
+                description:
+                    "Austrian singer-songwriter writing and performing in English and German.",
+                url: "https://alex-hiermann.github.io/jaeckmusic",
+                sameAs: [
+                    "https://jaeckmusic.com",
+                    "https://open.spotify.com/artist/5KbZOwHcpetbnxhrDScWlp",
+                    "https://www.youtube.com/@j%C3%A6ckofficial",
+                    "https://www.instagram.com/jaeckofficial",
+                ],
+            })}
+        />
+    </head>
+
+    <body>
+        <a href="#main" class="skip-link">Zum Inhalt springen</a>
+        <Nav lang={lang} tr={tr} base={base} />
+        <main id="main">
+            <slot />
+        </main>
+        <Footer lang={lang} tr={tr} base={base} />
+    </body>
+</html>

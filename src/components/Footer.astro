@@ -1,0 +1,169 @@
+---
+import type { Lang, Translations } from "../i18n/translations";
+
+interface Props {
+    lang: Lang;
+    tr: Translations;
+    base: string;
+}
+
+const { lang, tr, base } = Astro.props;
+const impressumHref = lang === "en" ? `${base}en/imprint` : `${base}impressum`;
+const datenschutzHref =
+    lang === "en" ? `${base}en/privacy` : `${base}datenschutz`;
+const contactHref = lang === "en" ? `${base}en/contact` : `${base}contact`;
+---
+
+<footer class="border-t border-[var(--border)] mt-32">
+    <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <!-- Brand -->
+            <div>
+                <p
+                    class="font-display text-4xl font-bold text-[var(--text)] mb-3"
+                >
+                    JÆCK
+                </p>
+                <p class="text-sm text-[var(--muted)] tracking-wide">
+                    {tr.footer.tagline}
+                </p>
+            </div>
+
+            <!-- Quick links -->
+            <div>
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--muted)] mb-4"
+                >
+                    Navigation
+                </p>
+                <ul class="flex flex-col gap-2 list-none p-0 m-0">
+                    {
+                        [
+                            {
+                                label: tr.nav.musik,
+                                href:
+                                    lang === "en"
+                                        ? `${base}en/music`
+                                        : `${base}music`,
+                            },
+                            {
+                                label: tr.nav.live,
+                                href:
+                                    lang === "en"
+                                        ? `${base}en/live`
+                                        : `${base}live`,
+                            },
+                            {
+                                label: tr.nav.videos,
+                                href:
+                                    lang === "en"
+                                        ? `${base}en/videos`
+                                        : `${base}videos`,
+                            },
+                            {
+                                label: tr.nav.galerie,
+                                href:
+                                    lang === "en"
+                                        ? `${base}en/gallery`
+                                        : `${base}gallery`,
+                            },
+                            { label: tr.nav.kontakt, href: contactHref },
+                        ].map(({ label, href }) => (
+                            <li>
+                                <a
+                                    href={href}
+                                    class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 link-line"
+                                >
+                                    {label}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <!-- Social / external -->
+            <div>
+                <p
+                    class="text-xs tracking-widest uppercase text-[var(--muted)] mb-4"
+                >
+                    Social
+                </p>
+                <ul class="flex flex-col gap-2 list-none p-0 m-0">
+                    <li>
+                        <a
+                            href="https://www.instagram.com/jaeckofficial"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 link-line"
+                        >
+                            Instagram ↗
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.youtube.com/@j%C3%A6ckofficial"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 link-line"
+                        >
+                            YouTube ↗
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://open.spotify.com/artist/5KbZOwHcpetbnxhrDScWlp"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 link-line"
+                        >
+                            Spotify ↗
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://jaeckmusic.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 link-line"
+                        >
+                            jaeckmusic.com ↗
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div
+            class="border-t border-[var(--border)] pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        >
+            <div class="flex flex-col gap-1">
+                <p class="text-xs text-[var(--muted)]">{tr.footer.rights}</p>
+                <p class="text-xs text-[var(--muted)]">
+                    {lang === "de" ? "Entwickelt von" : "Developed by"}&nbsp;<a
+                        href="https://github.com/alex-hiermann"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:text-[var(--accent)] transition-colors duration-200"
+                        >alex-hiermann</a
+                    >
+                </p>
+            </div>
+            <div class="flex gap-6">
+                <a
+                    href={impressumHref}
+                    class="text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200"
+                >
+                    {tr.footer.impressum}
+                </a>
+                <a
+                    href={datenschutzHref}
+                    class="text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200"
+                >
+                    {tr.footer.datenschutz}
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

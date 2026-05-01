@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { t } from "../i18n/translations";
+import { base } from "../utils/url";
+const tr = t("de");
+---
+
+<Layout title={`404 – ${tr.notFound.heading}`} noindex={true} lang="de">
+    <div class="min-h-dvh flex items-center justify-center px-6">
+        <div class="text-center">
+            <p
+                class="font-display text-[12rem] md:text-[20rem] font-bold leading-none text-[var(--border)] select-none"
+            >
+                404
+            </p>
+            <h1
+                class="font-display text-3xl md:text-5xl font-light text-[var(--text)] -mt-8 mb-6"
+            >
+                {tr.notFound.heading}
+            </h1>
+            <p class="text-[var(--muted)] mb-10 font-light">
+                {tr.notFound.sub}
+            </p>
+            <a href={base} class="btn-primary">
+                {tr.notFound.back}
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                    ></path></svg
+                >
+            </a>
+        </div>
+    </div>
+</Layout>

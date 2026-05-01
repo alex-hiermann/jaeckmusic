@@ -1,0 +1,193 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { t } from "../i18n/translations";
+import { base } from "../utils/url";
+const tr = t("de");
+
+const highlights = [
+    {
+        venue: "Gasometer",
+        location: "Wien, Österreich",
+        note: "Einer der renommiertesten Veranstaltungsorte Österreichs.",
+        img: "https://jaeckmusic.com/_assets/media/9cbd50704f4b562881c18442e222923b.jpg",
+    },
+    {
+        venue: "The Voice of Germany",
+        location: "ProSieben / Sat.1",
+        note: "Teilnahme an Deutschlands bekanntester Musikshow.",
+        img: "https://jaeckmusic.com/_assets/media/ce8336059775030992f12e62220cc5c4.jpg",
+    },
+];
+
+const pastShows = [
+    {
+        venue: "Sonstige Auftritte",
+        location: "Österreich & DE",
+        year: "2023–2025",
+    },
+    {
+        venue: "Hochzeiten & Firmenfeiern",
+        location: "Event Music",
+        year: "laufend",
+    },
+    { venue: "Akustik Sessions", location: "Diverse Venues", year: "laufend" },
+];
+---
+
+<Layout
+    title={tr.livePage.title}
+    description={tr.livePage.description}
+    lang="de"
+>
+    <div class="pt-32 pb-20">
+        <!-- Header -->
+        <div class="max-w-7xl mx-auto px-6 mb-20">
+            <p
+                class="text-xs tracking-[0.3em] uppercase text-[var(--accent)] mb-4"
+            >
+                <span class="accent-line"></span>{tr.livePage.sectionLabel}
+            </p>
+            <h1 class="font-display text-6xl md:text-8xl font-light">
+                {tr.livePage.heading}
+            </h1>
+        </div>
+
+        <!-- Upcoming -->
+        <div class="max-w-7xl mx-auto px-6 mb-20">
+            <p
+                class="text-xs tracking-[0.3em] uppercase text-[var(--muted)] mb-6"
+            >
+                {tr.livePage.upcoming}
+            </p>
+            <div
+                class="flex flex-col divide-y divide-[var(--border)] border border-[var(--border)] bg-[var(--surface)]"
+            >
+                <div
+                    class="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                >
+                    <div class="flex flex-col gap-1">
+                        <p
+                            class="text-xs tracking-widest uppercase text-[var(--accent)]"
+                        >
+                            Sa, 09. Mai 2026 · 20:00 Uhr
+                        </p>
+                        <p class="text-[var(--text)] font-normal text-lg">
+                            Voices For The Hungry
+                        </p>
+                        <p class="text-[var(--muted)] font-light text-sm">
+                            G5 Live Music Bar · Wien
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                >
+                    <div class="flex flex-col gap-1">
+                        <p
+                            class="text-xs tracking-widest uppercase text-[var(--accent)]"
+                        >
+                            Sa, 30. Mai 2026 · 20:00 Uhr
+                        </p>
+                        <p class="text-[var(--text)] font-normal text-lg">
+                            Das kleine Konzert
+                        </p>
+                        <p class="text-[var(--muted)] font-light text-sm">
+                            G5 Live Music Bar · Wien
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="max-w-7xl mx-auto px-6 mb-20">
+            <p
+                class="text-xs tracking-[0.3em] uppercase text-[var(--muted)] mb-10"
+            >
+                {tr.livePage.highlights}
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {
+                    highlights.map(({ venue, location, note, img }) => (
+                        <div class="relative overflow-hidden group">
+                            <div class="img-reveal aspect-video">
+                                <img
+                                    src={img}
+                                    alt={venue}
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                    width="800"
+                                    height="450"
+                                />
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-transparent to-transparent flex flex-col justify-end p-6">
+                                <p class="text-xs tracking-widest uppercase text-[var(--accent)] mb-1">
+                                    {location}
+                                </p>
+                                <p class="font-display text-3xl font-semibold text-[var(--text)]">
+                                    {venue}
+                                </p>
+                                <p class="text-sm text-[var(--muted)] mt-2 font-light max-w-xs">
+                                    {note}
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Past shows table -->
+        <div class="max-w-7xl mx-auto px-6">
+            <p
+                class="text-xs tracking-[0.3em] uppercase text-[var(--muted)] mb-8"
+            >
+                {tr.livePage.past}
+            </p>
+            <div class="border-t border-[var(--border)]">
+                {
+                    pastShows.map(({ venue, location, year }) => (
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between py-5 border-b border-[var(--border)] gap-2">
+                            <div>
+                                <p class="font-display text-xl font-light text-[var(--text)]">
+                                    {venue}
+                                </p>
+                                <p class="text-sm text-[var(--muted)] font-light">
+                                    {location}
+                                </p>
+                            </div>
+                            <p class="text-sm text-[var(--muted)] font-light tracking-wider">
+                                {year}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="max-w-7xl mx-auto px-6 mt-20 text-center">
+            <p
+                class="font-display text-2xl md:text-3xl font-light italic text-[var(--text)] mb-6"
+            >
+                Du willst JÆCK für dein Event buchen?
+            </p>
+            <a href={`${base}contact`} class="btn-primary">
+                Jetzt anfragen
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                    ></path></svg
+                >
+            </a>
+        </div>
+    </div>
+</Layout>
