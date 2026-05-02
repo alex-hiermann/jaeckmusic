@@ -15,8 +15,8 @@ const galleryImages = [
 ---
 
 <Layout
-    title="JÆCK – Singer, Songwriter"
-    description="JÆCK – Austrian singer-songwriter. Music in English & German, event music, guitar & voice."
+    title="JÆCK · Singer, Songwriter"
+    description="JÆCK - Austrian singer-songwriter. Music in English & German, event music, guitar & voice."
     lang="en"
 >
     <!-- HERO -->
@@ -151,16 +151,16 @@ const galleryImages = [
     <section class="border-y border-[var(--border)] py-12">
         <div class="max-w-7xl mx-auto px-6">
             <div
-                class="flex flex-wrap justify-center md:justify-between items-center gap-8"
+                class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-[var(--border)]"
             >
                 {
                     [
-                        { value: "Gasometer", label: "Vienna" },
-                        { value: "The Voice", label: "of Germany" },
-                        { value: "EN & DE", label: "Languages" },
-                        { value: "Live", label: "Events & Booking" },
+                        { value: "Voice", label: "Raw & Unfiltered" },
+                        { value: "Guitar", label: "Singer-Songwriter" },
+                        { value: "Emotion", label: "Moments that last" },
+                        { value: "Live", label: "Your Event Soundtrack" },
                     ].map(({ value, label }) => (
-                        <div class="text-center px-8 md:border-l first:border-l-0 border-[var(--border)]">
+                        <div class="text-center px-4 md:px-8 py-2">
                             <p class="font-display text-3xl md:text-4xl font-semibold text-[var(--text)] mb-1">
                                 {value}
                             </p>
@@ -242,8 +242,8 @@ const galleryImages = [
                     {tr.musikPage.heading}
                 </h2>
                 <p class="text-[var(--muted)] mb-10 font-light leading-relaxed">
-                    JÆCK writes songs that capture moments. Between English and
-                    German, between acoustic and production.
+                    JÆCK writes songs that capture moments. From acoustic to
+                    production.
                 </p>
                 <a href={`${base}en/music`} class="btn-primary">
                     {tr.musikPage.spotifyNote}
@@ -280,7 +280,7 @@ const galleryImages = [
                 <p
                     class="text-[var(--muted)] mb-10 font-light leading-relaxed max-w-lg"
                 >
-                    From intimate acoustic sessions to big stages — JÆCK makes
+                    From intimate acoustic sessions to big stages - JÆCK makes
                     every audience fall silent and sing along.
                 </p>
                 <a href={`${base}en/live`} class="btn-ghost"
@@ -345,3 +345,39 @@ const galleryImages = [
         </div>
     </section>
 </Layout>
+
+<script>
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const counters = document.querySelectorAll<HTMLElement>("[data-count-to]");
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target as HTMLElement;
+                const to = parseInt(el.dataset.countTo ?? "0");
+                const from = parseInt(el.dataset.countFrom ?? "0");
+                if (prefersReducedMotion) {
+                    el.textContent = String(to);
+                    observer.unobserve(el);
+                    return;
+                }
+                const duration = 1400;
+                const start = performance.now();
+                const update = (now: number) => {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = String(
+                        Math.round(from + (to - from) * eased),
+                    );
+                    if (progress < 1) requestAnimationFrame(update);
+                };
+                requestAnimationFrame(update);
+                observer.unobserve(el);
+            });
+        },
+        { threshold: 0.6 },
+    );
+    counters.forEach((c) => observer.observe(c));
+</script>

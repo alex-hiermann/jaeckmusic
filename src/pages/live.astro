@@ -6,14 +6,16 @@ const tr = t("de");
 
 const highlights = [
     {
-        venue: "Gasometer",
+        venue: "Opener für Calum Scott",
         location: "Wien, Österreich",
-        note: "Einer der renommiertesten Veranstaltungsorte Österreichs.",
+        year: "2025",
+        note: "Support im Gasometer bei seinem Österreich-Tourauftritt.",
         img: "https://jaeckmusic.com/_assets/media/9cbd50704f4b562881c18442e222923b.jpg",
     },
     {
         venue: "The Voice of Germany",
         location: "ProSieben / Sat.1",
+        year: "2024",
         note: "Teilnahme an Deutschlands bekanntester Musikshow.",
         img: "https://jaeckmusic.com/_assets/media/ce8336059775030992f12e62220cc5c4.jpg",
     },
@@ -21,17 +23,29 @@ const highlights = [
 
 const pastShows = [
     {
-        venue: "Sonstige Auftritte",
-        location: "Österreich & DE",
-        year: "2023–2025",
-    },
-    {
-        venue: "Hochzeiten & Firmenfeiern",
-        location: "Event Music",
+        venue: "Akustik Sessions",
+        location: "Diverse Veranstaltungsorte",
         year: "laufend",
     },
-    { venue: "Akustik Sessions", location: "Diverse Venues", year: "laufend" },
+    {
+        venue: "Firmenfeiern & Events",
+        location: "Eventmusik",
+        year: "laufend",
+    },
+    {
+        venue: "Hochzeiten & Taufen",
+        location: "Familäre Anlässe",
+        year: "laufend",
+    },
+    {
+        venue: "Sonstige Auftritte",
+        location: "Österreich & Deutschland",
+        year: "seit 2022",
+    },
 ];
+
+const g5_map_url =
+    "https://www.google.com/maps/place/G5+-+Live+Music+Bar/@48.235861,16.3563812,663m/data=!3m1!1e3!4m6!3m5!1s0x476d07208803138b:0xa37f2239d91523df!8m2!3d48.235861!4d16.3563812!16s%2Fg%2F11vqscmnpf";
 ---
 
 <Layout
@@ -69,15 +83,26 @@ const pastShows = [
                         <p
                             class="text-xs tracking-widest uppercase text-[var(--accent)]"
                         >
-                            Sa, 09. Mai 2026 · 20:00 Uhr
+                            Sa, 09. Mai 2026 · 18:00 Uhr
                         </p>
                         <p class="text-[var(--text)] font-normal text-lg">
                             Voices For The Hungry
                         </p>
                         <p class="text-[var(--muted)] font-light text-sm">
-                            G5 Live Music Bar · Wien
+                            <a
+                                href={g5_map_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:text-[var(--accent)] transition-colors"
+                                >G5 Live Music Bar · Wien ↗</a
+                            >
                         </p>
                     </div>
+                    <span
+                        class="btn-ghost flex-shrink-0 cursor-default opacity-70 text-xs"
+                    >
+                        Abendkassa · Cash Only
+                    </span>
                 </div>
                 <div
                     class="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
@@ -86,15 +111,29 @@ const pastShows = [
                         <p
                             class="text-xs tracking-widest uppercase text-[var(--accent)]"
                         >
-                            Sa, 30. Mai 2026 · 20:00 Uhr
+                            Sa, 30. Mai 2026 · 19:00 Uhr
                         </p>
                         <p class="text-[var(--text)] font-normal text-lg">
                             Das kleine Konzert
                         </p>
                         <p class="text-[var(--muted)] font-light text-sm">
-                            G5 Live Music Bar · Wien
+                            <a
+                                href={g5_map_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:text-[var(--accent)] transition-colors"
+                                >G5 Live Music Bar · Wien ↗</a
+                            >
                         </p>
                     </div>
+                    <a
+                        href="https://ticket1389.tickethome.at/buchen/252/30.05.2026/1900&ref=jaeck"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-primary flex-shrink-0"
+                    >
+                        Tickets ↗
+                    </a>
                 </div>
             </div>
         </div>
@@ -108,7 +147,7 @@ const pastShows = [
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {
-                    highlights.map(({ venue, location, note, img }) => (
+                    highlights.map(({ venue, location, year, note, img }) => (
                         <div class="relative overflow-hidden group">
                             <div class="img-reveal aspect-video">
                                 <img
@@ -122,7 +161,7 @@ const pastShows = [
                             </div>
                             <div class="absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-transparent to-transparent flex flex-col justify-end p-6">
                                 <p class="text-xs tracking-widest uppercase text-[var(--accent)] mb-1">
-                                    {location}
+                                    {location} · {year}
                                 </p>
                                 <p class="font-display text-3xl font-semibold text-[var(--text)]">
                                     {venue}

@@ -7,14 +7,13 @@ const tr = t("en");
 const videos = [
     {
         id: "wZBYF9QcndA",
-        title: "JÆCK – Official YouTube Channel",
-        subtitle: "Music Video",
-    },
-    { id: "wZBYF9QcndA", title: "JÆCK – Live Performance", subtitle: "Live" },
-    {
-        id: "wZBYF9QcndA",
-        title: "JÆCK – Acoustic Session",
+        title: "JÆCK · Acoustic Session",
         subtitle: "Acoustic",
+    },
+    {
+        id: "-TO7ceASVDo",
+        title: "JÆCK · The Voice Of Germany 2024",
+        subtitle: "Live",
     },
 ];
 ---
@@ -50,30 +49,9 @@ const videos = [
             </a>
         </div>
 
-        <div class="mb-12">
-            <div class="video-embed border border-[var(--border)]">
-                <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${videos[0].id}`}
-                    title={videos[0].title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-                    loading="lazy"></iframe>
-            </div>
-            <div class="mt-4">
-                <p
-                    class="text-xs tracking-widest uppercase text-[var(--accent)] mb-1"
-                >
-                    {videos[0].subtitle}
-                </p>
-                <p class="font-display text-2xl font-light text-[var(--text)]">
-                    {videos[0].title}
-                </p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             {
-                videos.slice(1).map(({ id, title, subtitle }) => (
+                videos.map(({ id, title, subtitle }) => (
                     <div>
                         <div class="video-embed border border-[var(--border)]">
                             <iframe

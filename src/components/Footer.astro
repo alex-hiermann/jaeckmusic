@@ -11,6 +11,7 @@ const { lang, tr, base } = Astro.props;
 const impressumHref = lang === "en" ? `${base}en/imprint` : `${base}impressum`;
 const datenschutzHref =
     lang === "en" ? `${base}en/privacy` : `${base}datenschutz`;
+const agbHref = lang === "en" ? `${base}en/agb` : `${base}agb`;
 const contactHref = lang === "en" ? `${base}en/contact` : `${base}contact`;
 ---
 
@@ -92,6 +93,16 @@ const contactHref = lang === "en" ? `${base}en/contact` : `${base}contact`;
                 <ul class="flex flex-col gap-2 list-none p-0 m-0">
                     <li>
                         <a
+                            href="https://open.spotify.com/artist/5KbZOwHcpetbnxhrDScWlp"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 link-line"
+                        >
+                            Spotify ↗
+                        </a>
+                    </li>
+                    <li>
+                        <a
                             href="https://www.instagram.com/jaeckofficial"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -112,22 +123,12 @@ const contactHref = lang === "en" ? `${base}en/contact` : `${base}contact`;
                     </li>
                     <li>
                         <a
-                            href="https://open.spotify.com/artist/5KbZOwHcpetbnxhrDScWlp"
+                            href="https://www.tiktok.com/@jaeckofficial"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 link-line"
                         >
-                            Spotify ↗
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="https://jaeckmusic.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200 link-line"
-                        >
-                            jaeckmusic.com ↗
+                            TikTok ↗
                         </a>
                     </li>
                 </ul>
@@ -162,6 +163,12 @@ const contactHref = lang === "en" ? `${base}en/contact` : `${base}contact`;
                     class="text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200"
                 >
                     {tr.footer.datenschutz}
+                </a>
+                <a
+                    href={agbHref}
+                    class="text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors duration-200"
+                >
+                    {tr.footer.agb}
                 </a>
             </div>
         </div>

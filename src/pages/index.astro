@@ -15,8 +15,8 @@ const galleryImages = [
 ---
 
 <Layout
-  title="JÆCK – Singer, Songwriter"
-  description="JÆCK – Österreichischer Singer-Songwriter. Musik auf Englisch & Deutsch, Event Music, Gitarre & Stimme."
+  title="JÆCK · Singer, Songwriter"
+  description="JÆCK - Österreichischer Singer-Songwriter"
   lang="de"
 >
   <!-- HERO -->
@@ -139,16 +139,16 @@ const galleryImages = [
   <section class="border-y border-[var(--border)] py-12">
     <div class="max-w-7xl mx-auto px-6">
       <div
-        class="flex flex-wrap justify-center md:justify-between items-center gap-8"
+        class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-[var(--border)]"
       >
         {
           [
-            { value: "Gasometer", label: "Wien" },
-            { value: "The Voice", label: "of Germany" },
-            { value: "DE & EN", label: "Sprachen" },
-            { value: "Live", label: "Events & Booking" },
+            { value: "Stimme", label: "Echt & Ungeschminkt" },
+            { value: "Gitarre", label: "Singer-Songwriter" },
+            { value: "Emotion", label: "Momente, die bleiben" },
+            { value: "Live", label: "Dein Event-Soundtrack" },
           ].map(({ value, label }) => (
-            <div class="text-center px-8 md:border-l first:border-l-0 border-[var(--border)]">
+            <div class="text-center px-4 md:px-8 py-2">
               <p class="font-display text-3xl md:text-4xl font-semibold text-[var(--text)] mb-1">
                 {value}
               </p>
@@ -205,21 +205,6 @@ const galleryImages = [
         ))
       }
     </div>
-    <a href={`${base}gallery`} class="btn-ghost sm:hidden mt-6 inline-flex">
-      Alle Fotos
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
-      >
-    </a>
   </section>
 
   <!-- MUSIC TEASER -->
@@ -233,8 +218,8 @@ const galleryImages = [
           {tr.musikPage.heading}
         </h2>
         <p class="text-[var(--muted)] mb-10 font-light leading-relaxed">
-          JÆCK schreibt Songs, die Momente festhalten. Zwischen Englisch und
-          Deutsch, zwischen Akustik und Produktion.
+          JÆCK schreibt Songs, die Momente festhalten. Von Akustik bis
+          Produktion.
         </p>
         <a href={`${base}music`} class="btn-primary">
           {tr.musikPage.spotifyNote}
@@ -268,7 +253,7 @@ const galleryImages = [
         <p
           class="text-[var(--muted)] mb-10 font-light leading-relaxed max-w-lg"
         >
-          Von der intimen Akustik-Session bis zur großen Bühne — JÆCK bringt
+          Von der intimen Akustik-Session bis zur großen Bühne - JÆCK bringt
           jedes Publikum zum Schweigen und Mitsingen.
         </p>
         <a href={`${base}live`} class="btn-ghost">{tr.livePage.bookingCta}</a>
@@ -328,3 +313,37 @@ const galleryImages = [
     </div>
   </section>
 </Layout>
+
+<script>
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const counters = document.querySelectorAll<HTMLElement>("[data-count-to]");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const to = parseInt(el.dataset.countTo ?? "0");
+        const from = parseInt(el.dataset.countFrom ?? "0");
+        if (prefersReducedMotion) {
+          el.textContent = String(to);
+          observer.unobserve(el);
+          return;
+        }
+        const duration = 1400;
+        const start = performance.now();
+        const update = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = String(Math.round(from + (to - from) * eased));
+          if (progress < 1) requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+        observer.unobserve(el);
+      });
+    },
+    { threshold: 0.6 },
+  );
+  counters.forEach((c) => observer.observe(c));
+</script>
